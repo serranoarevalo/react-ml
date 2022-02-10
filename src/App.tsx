@@ -11,9 +11,6 @@ export default function App() {
   const setTransfer = () => setMode("transferLearning");
   return (
     <div>
-      <Helmet>
-        <title>Ml.Demo | ml5 + React</title>
-      </Helmet>
       <header>
         <h1>Ml.Demo | ml5.js + React</h1>
         <p>
