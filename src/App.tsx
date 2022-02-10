@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Helmet from "react-helmet";
+import ImageRecognition from "./components/image-recognition";
+import TransferLearning from "./components/transfer-learning";
 
-function App() {
+export default function App() {
+  const [mode, setMode] = useState<"imageRecognition" | "transferLearning">(
+    "imageRecognition"
+  );
+  const setRecognition = () => setMode("imageRecognition");
+  const setTransfer = () => setMode("transferLearning");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div>
+      <Helmet>
+        <title>Ml.Demo | ml5 + React</title>
+      </Helmet>
+      <header>
+        <h1>Ml.Demo | ml5.js + React</h1>
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          <button onClick={setRecognition}>
+            <b>Image Recognition</b>
+          </button>
+          <button onClick={setTransfer}>
+            <b>Transfer Learning</b>
+          </button>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <div>
+        {mode === "imageRecognition" && <ImageRecognition />}
+        {mode === "transferLearning" && <TransferLearning />}
+      </div>
     </div>
   );
 }
-
-export default App;
