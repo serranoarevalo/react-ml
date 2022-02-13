@@ -75,7 +75,7 @@ export default function TransferLearning() {
       setTimeout(() => {
         clearInterval(addingId.current);
         setAdding("");
-      }, 5000);
+      }, 8000);
     }
   }, [adding]);
   const train = () => {
