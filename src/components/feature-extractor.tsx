@@ -105,7 +105,7 @@ export default function TransferLearning() {
           <div className="w-1/2 flex flex-col space-y-3">
             <video autoPlay className="w-full rounded-md" ref={video} />
             {trained ? (
-              <div>
+              <div className=" text-center text-xl">
                 That is a{" "}
                 <span className="underline-offset-2 underline decoration-pink-500 decoration-dotted decoration-2 font-medium">
                   {result?.label}

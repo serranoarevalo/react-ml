@@ -1,7 +1,7 @@
-# Ml.Demo
+# React.Ml
 
-Machine Learning in the browser using ml5 + React.
+Machine Learning (Image Recognition and Feature Extraction) in the browser using ml5 + React.
 
 This is the code for the demos on [this video](https://youtube.com/)
 
-Demo URL:
+Demo URL: https://serranoarevalo.github.io/react-ml
