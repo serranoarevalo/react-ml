@@ -55,7 +55,7 @@ export default function ImageRecognition() {
       <Helmet>
         <title>Image Recognition | React.Ml</title>
       </Helmet>
-      {isModelReady ? (
+      {!isModelReady ? (
         <span className="block w-full text-center">Loading model...</span>
       ) : previewUrl ? (
         <div className="flex flex-col items-center gap-y-5">
