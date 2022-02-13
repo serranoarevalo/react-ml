@@ -56,46 +56,46 @@ export default function ImageRecognition() {
         <title>Image Recognition | React.Ml</title>
       </Helmet>
       {isModelReady ? (
-        previewUrl ? (
-          <div className="flex flex-col items-center gap-y-5">
-            <img
-              width={800}
-              src={previewUrl}
-              alt="shush"
-              className="h-[50vh] object-center object-cover rounded-lg"
-            />
+        <span className="block w-full text-center">Loading model...</span>
+      ) : previewUrl ? (
+        <div className="flex flex-col items-center gap-y-5">
+          <img
+            width={800}
+            src={previewUrl}
+            alt="shush"
+            className="h-[50vh] object-center object-cover rounded-lg"
+          />
 
-            {result ? (
-              <div>
-                I'm{" "}
-                <span className="underline-offset-2 underline decoration-pink-500 decoration-dotted decoration-2 font-medium">
-                  {Math.round(result?.confidence * 100)}%
-                </span>{" "}
-                sure that this is a{" "}
-                <span className="underline-offset-2 underline decoration-pink-500 decoration-dotted decoration-2 font-medium">
-                  {result?.label}
-                </span>
-              </div>
-            ) : (
-              <button
-                className="border-white  transition-colors border rounded-md text-white px-8 font-medium py-2"
-                onClick={onWhatIsIt}
-              >
-                What is it?
-              </button>
-            )}
-          </div>
-        ) : (
-          <div
-            className="border-white border-dashed text-lg rounded-lg border-2 min-h-[50vh] flex items-center justify-center w-full"
-            onDrop={onDrop}
-            onDragLeave={onDragExit}
-            onDragOver={onDragOver}
-          >
-            {dragging ? <span>Drop it!</span> : <span>Drag a photo here</span>}
-          </div>
-        )
-      ) : null}
+          {result ? (
+            <div>
+              I'm{" "}
+              <span className="underline-offset-2 underline decoration-pink-500 decoration-dotted decoration-2 font-medium">
+                {Math.round(result?.confidence * 100)}%
+              </span>{" "}
+              sure that this is a{" "}
+              <span className="underline-offset-2 underline decoration-pink-500 decoration-dotted decoration-2 font-medium">
+                {result?.label}
+              </span>
+            </div>
+          ) : (
+            <button
+              className="border-white  transition-colors border rounded-md text-white px-8 font-medium py-2"
+              onClick={onWhatIsIt}
+            >
+              What is it?
+            </button>
+          )}
+        </div>
+      ) : (
+        <div
+          className="border-white border-dashed text-lg rounded-lg border-2 min-h-[50vh] flex items-center justify-center w-full"
+          onDrop={onDrop}
+          onDragLeave={onDragExit}
+          onDragOver={onDragOver}
+        >
+          {dragging ? <span>Drop it!</span> : <span>Drag a photo here</span>}
+        </div>
+      )}
     </div>
   );
 }
