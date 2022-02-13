@@ -4,7 +4,7 @@ import TransferLearning from "./components/transfer-learning";
 
 export default function App() {
   const [mode, setMode] = useState<"imageRecognition" | "transferLearning">(
-    "imageRecognition"
+    "transferLearning"
   );
   const setRecognition = () => setMode("imageRecognition");
   const setTransfer = () => setMode("transferLearning");
@@ -13,20 +13,20 @@ export default function App() {
       <header className="mt-20">
         <div className="flex gap-5">
           <button
-            className={`border-2 rounded-md border-blue-500  px-10 text-lg py-4 ${
+            className={`border-2 rounded-md border-blue-500  px-10 py-4 ${
               mode === "imageRecognition"
                 ? "bg-blue-500 shadow-lg text-white shadow-blue-500/50"
-                : "border-2 border-blue-500 text-blue-500"
+                : "border-2 border-blue-400 text-blue-400"
             }`}
             onClick={setRecognition}
           >
             Image Recognition
           </button>
           <button
-            className={`border-2 rounded-md border-blue-500  px-10 text-lg py-4 ${
+            className={`border-2 rounded-md border-blue-500  px-10 py-4 ${
               mode === "transferLearning"
                 ? "bg-blue-500 shadow-lg text-white shadow-blue-500/50"
-                : " border-blue-500 text-blue-500"
+                : " border-blue-400 text-blue-400"
             }`}
             onClick={setTransfer}
           >
@@ -34,7 +34,7 @@ export default function App() {
           </button>
         </div>
       </header>
-      <div className="mt-20 w-full max-w-2xl mx-auto">
+      <div className="mt-20 w-full max-w-5xl mx-auto">
         {mode === "imageRecognition" && <ImageRecognition />}
         {mode === "transferLearning" && <TransferLearning />}
       </div>
