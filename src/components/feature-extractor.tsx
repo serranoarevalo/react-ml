@@ -1,6 +1,7 @@
 import ml5 from "ml5";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Result } from "./image-recognition";
 
 interface TransferLearningForm {
   firstLabel: string;
@@ -16,7 +17,9 @@ export default function TransferLearning() {
   const addingId = useRef<any>(null);
   const [adding, setAdding] = useState<"firstLabel" | "secondLabel" | "">("");
   const [isModelReady, setIsModelReady] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
+  const [trained, setTrained] = useState(false);
+  const [training, setTraining] = useState(false);
+  const [result, setResult] = useState<Result>();
   const onValid = () => {};
   const startMedia = async () => {
     try {
@@ -39,9 +42,9 @@ export default function TransferLearning() {
       startMedia();
     }
   }, [isModelReady]);
-  const addImage = () => {
+  const getVideoImage = () => {
     const canvas = document.createElement("canvas");
-    if (!canvas || !video.current || adding === "") return;
+    if (!canvas || !video.current) return;
     canvas.width = video.current.videoWidth;
     canvas.height = video.current.videoHeight;
     canvas
@@ -50,7 +53,11 @@ export default function TransferLearning() {
     const url = canvas.toDataURL();
     const image = document.createElement("img");
     image.src = url;
-    classifier.current.addImage(image, watch(adding));
+    return image;
+  };
+  const addImage = () => {
+    if (adding === "") return;
+    classifier.current.addImage(getVideoImage(), watch(adding));
     console.log("Adding image", watch(adding));
   };
   const onFirstClick = () => {
@@ -66,14 +73,53 @@ export default function TransferLearning() {
       addingId.current = setInterval(addImage, 5);
       setTimeout(() => {
         clearInterval(addingId.current);
+        setAdding("");
       }, 5000);
     }
   }, [adding]);
+  const train = () => {
+    setTraining(true);
+    classifier.current.train((loss: any) => {
+      if (loss === null) {
+        setTraining(false);
+        setTrained(true);
+      }
+    });
+  };
+  useEffect(() => {
+    if (!trained) return;
+    setInterval(() => {
+      classifier.current.classify(getVideoImage(), (err: any, result: any) => {
+        setResult(
+          result.reduce((prev: any, current: any) =>
+            prev.confidence > current.confidence ? prev : current
+          )
+        );
+      });
+    }, 1);
+  }, [trained]);
   return (
     <div className=" w-full h-[50vh]">
       {isModelReady ? (
         <div className="flex gap-5">
-          <video autoPlay className="w-1/2 rounded-md" ref={video} />
+          <div className="w-1/2 flex flex-col space-y-3">
+            <video autoPlay className="w-full rounded-md" ref={video} />
+            {trained ? (
+              <div>
+                That is a{" "}
+                <span className="underline-offset-2 underline decoration-pink-500 decoration-dotted decoration-2 font-medium">
+                  {result?.label}
+                </span>
+              </div>
+            ) : (
+              <button
+                onClick={train}
+                className="border-white  transition-colors border rounded-md text-white px-8 font-medium py-2"
+              >
+                {training ? "Loading..." : "Extract Features"}
+              </button>
+            )}
+          </div>
           <div className="w-full space-y-5 flex max-w-sm flex-col">
             <form
               onSubmit={handleSubmit(onValid)}
@@ -110,10 +156,9 @@ export default function TransferLearning() {
             </form>
             {adding ? (
               <span className="text-center font-medium  text-pink-400">
-                adding: {watch(adding)}
+                Training: {watch(adding)}
               </span>
             ) : null}
-            <img src={previewImage} width="500" />
           </div>
         </div>
       ) : (

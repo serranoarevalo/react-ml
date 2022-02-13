@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ImageRecognition from "./components/image-recognition";
-import TransferLearning from "./components/transfer-learning";
+import TransferLearning from "./components/feature-extractor";
 
 export default function App() {
   const [mode, setMode] = useState<"imageRecognition" | "transferLearning">(

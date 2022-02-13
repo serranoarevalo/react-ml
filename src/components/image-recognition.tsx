@@ -1,7 +1,7 @@
 import ml5 from "ml5";
 import React, { useEffect, useRef, useState } from "react";
 
-interface Result {
+export interface Result {
   label: string;
   confidence: number;
 }
