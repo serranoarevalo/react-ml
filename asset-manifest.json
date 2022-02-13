@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-ml/static/css/main.78c7a18e.css",
+    "main.js": "/react-ml/static/js/main.0d13c49d.js",
+    "index.html": "/react-ml/index.html",
+    "main.78c7a18e.css.map": "/react-ml/static/css/main.78c7a18e.css.map",
+    "main.0d13c49d.js.map": "/react-ml/static/js/main.0d13c49d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.78c7a18e.css",
+    "static/js/main.0d13c49d.js"
+  ]
+}
