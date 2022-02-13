@@ -4,7 +4,7 @@ import TransferLearning from "./components/feature-extractor";
 
 export default function App() {
   const [mode, setMode] = useState<"imageRecognition" | "transferLearning">(
-    "transferLearning"
+    "imageRecognition"
   );
   const setRecognition = () => setMode("imageRecognition");
   const setTransfer = () => setMode("transferLearning");
@@ -30,7 +30,7 @@ export default function App() {
             }`}
             onClick={setTransfer}
           >
-            Transfer Learning
+            Feature Extractor
           </button>
         </div>
       </header>

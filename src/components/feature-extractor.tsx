@@ -1,5 +1,6 @@
 import ml5 from "ml5";
 import { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Result } from "./image-recognition";
 
@@ -100,6 +101,9 @@ export default function TransferLearning() {
   }, [trained]);
   return (
     <div className=" w-full h-[50vh]">
+      <Helmet>
+        <title>Feature Extractor | React.Ml</title>
+      </Helmet>
       {isModelReady ? (
         <div className="flex gap-5">
           <div className="w-1/2 flex flex-col space-y-3">

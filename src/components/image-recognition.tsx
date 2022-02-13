@@ -1,5 +1,6 @@
 import ml5 from "ml5";
 import React, { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 export interface Result {
   label: string;
@@ -51,6 +52,9 @@ export default function ImageRecognition() {
 
   return (
     <div className="pb-40">
+      <Helmet>
+        <title>Image Recognition | React.Ml</title>
+      </Helmet>
       {isModelReady ? (
         previewUrl ? (
           <div className="flex flex-col items-center gap-y-5">
